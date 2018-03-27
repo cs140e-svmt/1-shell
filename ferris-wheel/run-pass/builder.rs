@@ -5,6 +5,35 @@ struct Builder {
     number: Option<usize>,
 }
 
+impl Builder {
+    fn default() -> Builder {
+        Builder {
+            string: None,
+            number: None
+        }
+    }
+
+    fn string<S: Into<String>>(&mut self, string: S) -> &mut Self {
+        self.string = Some(string.into());
+        self
+    }
+
+    fn number(&mut self, number: usize) -> &mut Self {
+        self.number = Some(number);
+        self
+    }
+
+    fn to_string(&self) -> String {
+        let string_part = self.string.as_ref().map_or_else(|| "", |v| v.as_str());
+        let number_part = match self.number {
+            None => String::new(),
+            Some(ref number) => number.to_string()
+        };
+
+        [string_part, number_part.as_str()].join(" ").trim().to_owned()
+    }
+}
+
 // Do not modify this function.
 fn main() {
     let empty = Builder::default().to_string();
