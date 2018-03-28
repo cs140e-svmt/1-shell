@@ -7,7 +7,7 @@ pub trait Foo {
 }
 
 pub trait FooToo {
-    fn foo(&self) -> usize { 2 }
+    fn footoo(&self) -> usize { 2 }
 }
 
 impl Foo for Dummy { }
@@ -18,7 +18,7 @@ fn main() {
     let dummy = Dummy;
 
     let x = dummy.foo();
-    let y = dummy.foo();
+    let y = dummy.footoo();
 
     // Values for `x` and `y` must come from calling `foo()` methods.
     assert_eq!(x, 1);
